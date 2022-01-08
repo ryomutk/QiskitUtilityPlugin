@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5dbf4d70148064b8764c43d74ffe78, type: 3}
+  m_Name: GateSetting
+  m_EditorClassIdentifier: 
+  _singleArgMethodDifine:
+    rawData:
+    - _key: 3
+      _value: qc.h({0})
+    - _key: 1
+      _value: qc.x({0})
+    - _key: 2
+      _value: qc.z({0})
+  _doubleArgMethodDefine:
+    rawData:
+    - _key: 4
+      _value: qc.cx({0},{1})
