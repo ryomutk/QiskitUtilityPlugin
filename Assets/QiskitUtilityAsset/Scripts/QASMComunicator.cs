@@ -6,8 +6,11 @@ using Newtonsoft.Json;
 
 public class QASMComunicator : Singleton<QASMComunicator>
 {
-    [SerializeField] float amplifier = 1.2f;
+    //[SerializeField] float amplifier = 1.2f;
+    [SerializeField] CircuitConfig circuitConfig;
+    [SerializeField] GateSetting gateSetting;
 
+    /*
     public SmallTask<float[]> GetRandomArrayTask(int shots)
     {
         var task = new SmallTask<float[]>();
@@ -15,6 +18,7 @@ public class QASMComunicator : Singleton<QASMComunicator>
 
         return task;
     }
+    */
 
     public SmallTask<QuantumResult> RunCircuitAsync(string method)
     {
@@ -45,6 +49,7 @@ public class QASMComunicator : Singleton<QASMComunicator>
         yield return null;
     }
 
+    /*
     IEnumerator GetResult(int num, SmallTask<float[]> task)
     {
         var formdata = new List<IMultipartFormSection>();
@@ -79,5 +84,5 @@ public class QASMComunicator : Singleton<QASMComunicator>
 
         return result;
     }
-
+    */
 }
