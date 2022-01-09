@@ -18,6 +18,18 @@ public class CircuitMeasurementResult
     public string[] maxStates{get;private set;}
     public int maxCount{get;private set;}
 
+    public string GetOverview()
+    {
+        System.Text.StringBuilder log = new System.Text.StringBuilder();
+        log.AppendFormat("{0,-20}","Raw Result:").AppendLine(resultString);
+        log.AppendFormat("{0,-20}","bit length:").AppendLine(bitLength.ToString());
+        log.AppendFormat("{0,-20}","Total Shots:").AppendLine(shots.ToString());
+        log.AppendFormat("{0,-20}","Max State(s):").Append("[").Append(string.Join(",",maxStates)).AppendLine("]");
+        log.AppendFormat("{0,-20}",">By Count:").AppendLine(maxCount.ToString());
+        log.AppendFormat("{0,-20}","QBit Probs:").Append("[").Append(string.Join(",",bitProbTable)).AppendLine("]");
+        return log.ToString();
+    }
+
     //get Existence probability of selected qubit
     public float GetProbability(int n)
     {

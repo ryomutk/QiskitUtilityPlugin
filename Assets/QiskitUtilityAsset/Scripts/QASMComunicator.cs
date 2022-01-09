@@ -23,7 +23,7 @@ public class QASMComunicator : Singleton<QASMComunicator>
     public SmallTask<CircuitMeasurementResult> RunCircuitAsync(string method)
     {
         var task = new SmallTask<CircuitMeasurementResult>();
-        StartCoroutine(RunCircuit(method,task));
+        StartCoroutine(RunCircuit(method, task));
         return task;
     }
 
@@ -39,12 +39,17 @@ public class QASMComunicator : Singleton<QASMComunicator>
 
         yield return new WaitUntil(() => www.isDone);
 
-        var result = www.downloadHandler.text;        
+        var result = www.downloadHandler.text;
 
         if (task != null)
         {
             var dat = new CircuitMeasurementResult(result);
             task.result = dat;
+#if DEBUG
+            var log = dat.GetOverview();
+            UnityEngine.Debug.Log(log);
+#endif
+
         }
         yield return null;
     }
