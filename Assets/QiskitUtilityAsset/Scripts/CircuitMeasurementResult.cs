@@ -1,14 +1,22 @@
 using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
+using System.Linq;
 
-public class QuantumResult
+public class CircuitMeasurementResult
 {
-    public Dictionary<string, int> rawData { get; private set; }
-    //各々のQubitの存在確立
-    public Dictionary<int, float> probTable { get; set; }
+    public Dictionary<string, int> rawResult { get; private set; }
+
+    /// <summary>
+    /// Probabilitys of each qubits appeared in measurement
+    /// </summary>
+    /// <value></value>
+    public Dictionary<int, float> bitProbTable { get; set; }
     public int bitLength { get; private set; }
-    public string resultString{get;private set;}
+    public string resultString { get; private set; }
+    public int shots { get; private set; }
+    public string[] maxStates{get;private set;}
+    public int maxCount{get;private set;}
 
     //get Existence probability of selected qubit
     public float GetProbability(int n)
@@ -17,24 +25,17 @@ public class QuantumResult
         {
             return 0;
         }
-        else if (probTable.ContainsKey(n))
+        else if (bitProbTable.ContainsKey(n))
         {
-            return probTable[n];
+            return bitProbTable[n];
         }
 
         return 0;
     }
 
-    public int totalShots { get; private set; }
-    public QuantumResult(Dictionary<string, int> rawData)
+    public CircuitMeasurementResult(string resultStr)
     {
-        this.rawData = rawData;
-        InitData();
-    }
-
-    public QuantumResult(string resultStr)
-    {
-        this.rawData = JsonConvert.DeserializeObject<Dictionary<string, int>>(resultStr);
+        this.rawResult = JsonConvert.DeserializeObject<Dictionary<string, int>>(resultStr);
         this.resultString = resultStr;
 
         InitData();
@@ -42,19 +43,19 @@ public class QuantumResult
 
     void InitData()
     {
-        probTable = new Dictionary<int, float>();
-        foreach (var data in rawData)
-        {
-            bitLength = data.Key.Length;
-            totalShots += data.Value;
-        }
+        bitProbTable = new Dictionary<int, float>();
+
+        bitLength = rawResult.Max(x=>x.Key.Length);
+        shots = rawResult.Sum(x=>x.Value);
+        maxCount = rawResult.Max(x=>x.Value);
+        maxStates = rawResult.Where(x=>x.Value==maxCount).ToDictionary(x=>x.Key,x=>x.Value).Keys.ToArray();
 
         Dictionary<int, int> countTable = new Dictionary<int, int>();
         for (int i = 0; i < bitLength; i++)
         {
             countTable[i] = 0;
         }
-        foreach (var item in rawData)
+        foreach (var item in rawResult)
         {
             /*
             var state = int.Parse(item.Key);
@@ -76,17 +77,17 @@ public class QuantumResult
 
         foreach (var item in countTable)
         {
-            probTable[item.Key] = item.Value / (float)totalShots;
+            bitProbTable[item.Key] = item.Value / (float)shots;
         }
     }
 
     public float GetRate(int flags)
     {
-        foreach (var data in rawData)
+        foreach (var data in rawResult)
         {
             if (flags == int.Parse(data.Key))
             {
-                return data.Value / totalShots;
+                return data.Value / shots;
             }
         }
 

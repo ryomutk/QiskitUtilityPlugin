@@ -22,12 +22,12 @@ public class QiskitTestor : MonoBehaviour
         StartCoroutine(CircuitTask(task));
     }
 
-    IEnumerator CircuitTask(ITask<QuantumResult> task)
+    IEnumerator CircuitTask(ITask<CircuitMeasurementResult> task)
     {
         yield return new WaitUntil(() => task.ready);
         Debug.Log(task.result.resultString);
         Debug.Log("probs:");
-        foreach(var data in task.result.probTable)
+        foreach(var data in task.result.bitProbTable)
         {
             Debug.Log("Bit num:"+data.Key+" Prob:"+data.Value);
         }

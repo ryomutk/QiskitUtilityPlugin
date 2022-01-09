@@ -627,7 +627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  amplifier: 1.2
+  circuitConfig: {fileID: 11400000, guid: a75fe22c129d70543b6bb0a086bf4916, type: 2}
+  gateSetting: {fileID: 11400000, guid: 37ee68cd9c5b3224ebe6b1b7a60cb551, type: 2}
 --- !u!4 &1620713923
 Transform:
   m_ObjectHideFlags: 0

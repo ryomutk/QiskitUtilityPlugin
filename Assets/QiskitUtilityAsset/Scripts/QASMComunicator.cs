@@ -20,14 +20,14 @@ public class QASMComunicator : Singleton<QASMComunicator>
     }
     */
 
-    public SmallTask<QuantumResult> RunCircuitAsync(string method)
+    public SmallTask<CircuitMeasurementResult> RunCircuitAsync(string method)
     {
-        var task = new SmallTask<QuantumResult>();
+        var task = new SmallTask<CircuitMeasurementResult>();
         StartCoroutine(RunCircuit(method,task));
         return task;
     }
 
-    IEnumerator RunCircuit(string method, SmallTask<QuantumResult> task = null)
+    IEnumerator RunCircuit(string method, SmallTask<CircuitMeasurementResult> task = null)
     {
         var formdata = new List<IMultipartFormSection>();
         formdata.Add(new MultipartFormDataSection("circuit", method));
@@ -43,7 +43,7 @@ public class QASMComunicator : Singleton<QASMComunicator>
 
         if (task != null)
         {
-            var dat = new QuantumResult(result);
+            var dat = new CircuitMeasurementResult(result);
             task.result = dat;
         }
         yield return null;

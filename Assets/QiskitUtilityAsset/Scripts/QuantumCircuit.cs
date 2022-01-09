@@ -77,7 +77,7 @@ public class QuantumCircuit
     {
         return targetQbit>=0 && registerBit>targetQbit;
     }
-    public SmallTask<QuantumResult> RunAsync()
+    public SmallTask<CircuitMeasurementResult> RunAsync()
     {
         var str = circuitStr.ToString();
         str += "\n    qc.measure(qr,cr)";
