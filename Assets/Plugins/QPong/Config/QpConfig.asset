@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad568d5f8342f6418ac0f29fb893c11, type: 3}
+  m_Name: QpConfig
+  m_EditorClassIdentifier: 
+  _register: 3
+  _enemySpeed: 1
+  _frictionRandomRange: 10
+  _measurmentShowTime: 0.7
+  _gap: {x: 70, y: 50}
+  _orderNum: 9
+  keyConfig:
+  - key: 273
+    id: 3
+  - key: 274
+    id: 4
+  - key: 276
+    id: 6
+  - key: 275
+    id: 5
+  - key: 122
+    id: 2
+  - key: 120
+    id: 1

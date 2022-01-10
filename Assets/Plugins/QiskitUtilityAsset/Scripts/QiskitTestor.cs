@@ -9,10 +9,10 @@ public class QiskitTestor : MonoBehaviour
     void Start()
     {
         circuit = new QuantumCircuit(3);
-        circuit.AppendGate(0, Gates.H);
-        circuit.AppendGate(1, Gates.H);
-        circuit.AppendGate(2, Gates.H);
-        circuit.AppendGate(0,1,Gates.CX);
+        circuit.AppendGate(Gates.H,0);
+        circuit.AppendGate(Gates.H,1);
+        circuit.AppendGate(Gates.H,2);
+        circuit.AppendGate(Gates.CX,0,1);
     }
 
 

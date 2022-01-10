@@ -1,0 +1,186 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.10f1 (297d780c91bc) revision 2719096'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19043.1415; Version 2009; 64bit' Language: 'ja' Physical Memory: 16305 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+D:\UnityEditor\2020.3.10f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/UnityProjects/QiskitUtilityPlugin
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+57567
+Successfully changed project path to: D:/UnityProjects/QiskitUtilityPlugin
+D:/UnityProjects/QiskitUtilityPlugin
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 42.12 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.10f1 (297d780c91bc)
+[Subsystems] Discovering subsystems at path D:/UnityEditor/2020.3.10f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/UnityProjects/QiskitUtilityPlugin/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1660 (ID=0x2184)
+    Vendor:   
+    VRAM:     5991 MB
+    Driver:   27.21.14.6089
+Initialize mono
+Mono path[0] = 'D:/UnityEditor/2020.3.10f1/Editor/Data/Managed'
+Mono path[1] = 'D:/UnityEditor/2020.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'D:/UnityEditor/2020.3.10f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56460
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: D:/UnityEditor/2020.3.10f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: D:/UnityEditor/2020.3.10f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: D:/UnityEditor/2020.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001751 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 38.66 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.772 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003741 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 36.12 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.097 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 0.41 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2122 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 95.8 MB.
+System memory in use after: 95.7 MB.
+
+Unloading 33 unused Assets to reduce memory usage. Loaded Objects now: 2557.
+Total: 2.316300 ms (FindLiveObjects: 0.190700 ms CreateObjectMapping: 0.089000 ms MarkObjects: 1.861400 ms  DeleteObjects: 0.173600 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Plugins/QPong/Resources/Gates.aseprite
+  artifactKey: Guid(02a355a2c0b35854295cc4d87156735c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Gates.aseprite using Guid(02a355a2c0b35854295cc4d87156735c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '264d13af7b510755d93a4c8911f8246f') in 0.115763 seconds
+  Import took 0.160773 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.034475 seconds.
+  path: Assets/Plugins/QPong/Resources/BallMaterial.physicsMaterial2D
+  artifactKey: Guid(948fed07541fcb14c888a1523603fdfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/BallMaterial.physicsMaterial2D using Guid(948fed07541fcb14c888a1523603fdfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65528c00bba87755dd6fd677e1fecba5') in 0.005724 seconds
+  Import took 0.022729 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016394 seconds.
+  path: Assets/Plugins/QPong/Resources/Gates.png
+  artifactKey: Guid(20e00848be3739448b49338ea7641c6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Gates.png using Guid(20e00848be3739448b49338ea7641c6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '142328daa6d1edf6c3fb5a5027cba807') in 0.130868 seconds
+  Import took 0.137282 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.034995 seconds.
+  path: Assets/Plugins/QPong/Resources/Frame.png
+  artifactKey: Guid(7ba1468bd1f252944be24ff6d7a607e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Frame.png using Guid(7ba1468bd1f252944be24ff6d7a607e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80b8c3b812dc7814e7feb0b2b00df2d2') in 0.007641 seconds
+  Import took 0.011360 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004814 seconds.
+  path: Assets/Plugins/QPong/Resources/Slder.png
+  artifactKey: Guid(fe9e497691a037341826c2129a486c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Slder.png using Guid(fe9e497691a037341826c2129a486c1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81938f61bfdc170af91f142e028173d6') in 0.026979 seconds
+  Import took 0.029848 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004314 seconds.
+  path: Assets/Plugins/QPong/Resources/XGate.png
+  artifactKey: Guid(c26770ad2f5791946ac982b7e903aa22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/XGate.png using Guid(c26770ad2f5791946ac982b7e903aa22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d92f412d27e0d9a268546257f0ecec2') in 0.006488 seconds
+  Import took 0.026445 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.003971 seconds.
+  path: Assets/Plugins/QPong/Resources/HGate.png
+  artifactKey: Guid(7b13a16133425334db1635f3264ac679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/HGate.png using Guid(7b13a16133425334db1635f3264ac679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '407942f0c5130adb772afc4e76f295e4') in 0.006941 seconds
+  Import took 0.042149 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.058410 seconds.
+  path: Assets/Plugins/QPong/Resources/Cursor.png
+  artifactKey: Guid(a6ecddb03cb86334cbe0f3649bf5efd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Cursor.png using Guid(a6ecddb03cb86334cbe0f3649bf5efd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4b9c24b5142f866524ca5bb02863ed0') in 0.007150 seconds
+  Import took 0.020398 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008750 seconds.
+  path: Assets/Scenes
+  artifactKey: Guid(e1505a9eb55b81a4591f6434698fc27a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes using Guid(e1505a9eb55b81a4591f6434698fc27a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bea9b16c6ef43a4ae12c9154643b13d3') in 0.001647 seconds
+  Import took 0.004764 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.020104 seconds.
+  path: Assets/Plugins/QPong/Resources/Slder.aseprite
+  artifactKey: Guid(eb7b856adf2f5fc42a18a149675ee64b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Slder.aseprite using Guid(eb7b856adf2f5fc42a18a149675ee64b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55c779c51c7fbce290171afa9a40eeba') in 0.001749 seconds
+  Import took 0.018286 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016576 seconds.
+  path: Assets/Plugins/QPong/Resources/Frame.aseprite
+  artifactKey: Guid(1b8aa1b5434257f4fbfdf6d7630a68a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Resources/Frame.aseprite using Guid(1b8aa1b5434257f4fbfdf6d7630a68a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fe76521bd7f60bbfc40f576005fdd82') in 0.001547 seconds
+  Import took 0.027370 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.025985 seconds.
+  path: Assets/Plugins/QPong/Prefs/InputBar.prefab
+  artifactKey: Guid(203e31ead026c6a47836927cdeece791) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Prefs/InputBar.prefab using Guid(203e31ead026c6a47836927cdeece791) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eaf5c7e4803f6408a8cc5e11e45a8033') in 0.013638 seconds
+  Import took 0.026638 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007315 seconds.
+  path: Assets/Plugins/QPong/Prefs/Cursor.prefab
+  artifactKey: Guid(f97afe2ef7f9de843962c96def7d00df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/QPong/Prefs/Cursor.prefab using Guid(f97afe2ef7f9de843962c96def7d00df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '361be7cbe53c8853c0e6790697f33128') in 0.003016 seconds
+  Import took 0.020902 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006962 seconds.
+  path: Assets/Scenes/QPongNewGen.unity
+  artifactKey: Guid(6cc926afd0df48c45a5491d3c3b4f1e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/QPongNewGen.unity using Guid(6cc926afd0df48c45a5491d3c3b4f1e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f4afc9fcd16b48979338e4f9d0343d9') in 0.001785 seconds
+  Import took 0.004507 seconds .
+
