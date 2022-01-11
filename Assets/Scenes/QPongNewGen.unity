@@ -2766,7 +2766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  config: {fileID: 11400000, guid: 4b86c97c71d2f8646bd60497c1fdc0f1, type: 2}
+  requireScriptables:
+  - {fileID: 11400000, guid: 4b86c97c71d2f8646bd60497c1fdc0f1, type: 2}
+  _registerNum: 3
 --- !u!1 &1494019577
 GameObject:
   m_ObjectHideFlags: 0

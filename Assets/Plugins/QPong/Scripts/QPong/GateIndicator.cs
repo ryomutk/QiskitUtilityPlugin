@@ -29,7 +29,7 @@ public class GateIndicator : MonoBehaviour
     IEnumerator MesurementRoutine(Ball ball)
     {
         ball.Pause();
-        var task = DataProvider.instance.circuit.BuildAndRunAsync();
+        var task = DataProvider.instance.circuitManager.BuildAndRunAsync();
         yield return new WaitUntil(() => task.ready);
 
         ShowResult(task.result);
@@ -42,10 +42,10 @@ public class GateIndicator : MonoBehaviour
 
     public void ShowResult(CircuitMeasurementResult result)
     {
-        foreach(var slider in sliders)
+        foreach (var slider in sliders)
         {
             var ts = slider.watchingStateStr;
-            if(result.maxStates.Contains(ts))
+            if (result.maxStates.Contains(ts))
             {
                 slider.SetState(SliderState.full);
             }
@@ -59,86 +59,40 @@ public class GateIndicator : MonoBehaviour
 
     public void UpdateState()
     {
-        Dictionary<int, float> summary = null;
+        StartCoroutine(UpdateRoutine());
+    }
 
-        summary = DataProvider.instance.circuit.stateSummary;
+    IEnumerator UpdateRoutine()
+    {
+        Dictionary<string, float> summary = null;
+        while (DataProvider.instance.circuitManager.updatedToHead)
+        {
+            yield return null;
+            summary = DataProvider.instance.circuitManager.stateSummary;
+        }
+        if(summary==null)
+        {
+            summary=DataProvider.instance.circuitManager.stateSummary;
+        }
 
 
         foreach (var slider in sliders)
         {
-            var th = slider.watchingState / 100;
-
-            var sec = (slider.watchingState - th * 100) / 10;
-            var mono = slider.watchingState - th * 100 - sec * 10;
-
-            if (summary.TryGetValue(2, out var value) && value == 0.5f)
+            if (summary.TryGetValue(slider.watchingStateStr, out var val))
             {
-                slider.SetState(SliderState.half);
-            }
-            else if (th == 1)
-            {
-                if (summary[2] == 0)
-                {
-                    slider.SetState(SliderState.disabled);
-                    continue;
-                }
-                else if (slider.state != SliderState.half)
+                if (val == 1)
                 {
                     slider.SetState(SliderState.full);
                 }
+                else
+                {
+                    slider.SetState(SliderState.half);
+                }
             }
-            else if (summary[2] == 1)
+            else
             {
                 slider.SetState(SliderState.disabled);
-                continue;
             }
-
-
-            if (summary[1] == 0.5f)
-            {
-                slider.SetState(SliderState.half);
-            }
-            else if (sec == 1)
-            {
-                if (summary[1] == 0)
-                {
-                    slider.SetState(SliderState.disabled);
-                    continue;
-                }
-                else if (slider.state != SliderState.half)
-                {
-                    slider.SetState(SliderState.full);
-                }
-            }
-            else if (summary[1] == 1)
-            {
-                slider.SetState(SliderState.disabled);
-                continue;
-            }
-
-            if (summary[0] == 0.5f)
-            {
-                slider.SetState(SliderState.half);
-            }
-            else if (mono == 1)
-            {
-                if (summary[0] == 0)
-                {
-                    slider.SetState(SliderState.disabled);
-                    continue;
-                }
-                else if (slider.state != SliderState.half)
-                {
-                    slider.SetState(SliderState.full);
-                }
-            }
-            else if (summary[0] == 1)
-            {
-                slider.SetState(SliderState.disabled);
-                continue;
-            }
-
         }
-
     }
 }

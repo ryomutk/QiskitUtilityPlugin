@@ -21,12 +21,18 @@ public class CircuitMeasurementResult
     public string GetOverview()
     {
         System.Text.StringBuilder log = new System.Text.StringBuilder();
-        log.AppendFormat("{0,-20}","Raw Result:").AppendLine(resultString);
-        log.AppendFormat("{0,-20}","bit length:").AppendLine(bitLength.ToString());
-        log.AppendFormat("{0,-20}","Total Shots:").AppendLine(shots.ToString());
-        log.AppendFormat("{0,-20}","Max State(s):").Append("[").Append(string.Join(",",maxStates)).AppendLine("]");
-        log.AppendFormat("{0,-20}",">By Count:").AppendLine(maxCount.ToString());
-        log.AppendFormat("{0,-20}","QBit Probs:").Append("[").Append(string.Join(",",bitProbTable)).AppendLine("]");
+        log.AppendFormat("{0,-20}","Raw Result:");
+        log.AppendLine(resultString);
+        log.AppendFormat("{0,-20}","bit length:");
+        log.AppendLine(bitLength.ToString());
+        log.AppendFormat("{0,-20}","Total Shots:");
+        log.AppendLine(shots.ToString());
+        log.AppendFormat("{0,-20}","Max State(s):");
+        log.Append("[").Append(string.Join(",",maxStates)).AppendLine("]");
+        log.AppendFormat("{0,-20}",">By Count:");
+        log.AppendLine(maxCount.ToString());
+        log.AppendFormat("{0,-20}","QBit Probs:");
+        log.Append("[").Append(string.Join(",",bitProbTable)).AppendLine("]");
         return log.ToString();
     }
 

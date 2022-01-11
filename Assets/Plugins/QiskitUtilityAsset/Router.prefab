@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7eaa588b352d14a89e0c25cc32ecdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DDOL: 1
+  DDOL: 0
   circuitConfig: {fileID: 11400000, guid: a75fe22c129d70543b6bb0a086bf4916, type: 2}
   gateSetting: {fileID: 11400000, guid: 37ee68cd9c5b3224ebe6b1b7a60cb551, type: 2}

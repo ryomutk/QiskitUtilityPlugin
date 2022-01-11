@@ -1,40 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class QiskitTestor : MonoBehaviour
 {
-    QuantumCircuit circuit;
-    TMPro.TMP_Text logField;
+    [SerializeField] TMP_Text resultField;
+    [SerializeField] TMP_Text stateVector;
+    [SerializeField] TMP_Text probTables;
 
     void Start()
     {
-        circuit = new QuantumCircuit(3);
-        circuit.AppendGate(Gates.H, 0);
-        circuit.AppendGate(Gates.H, 1);
-        circuit.AppendGate(Gates.CX, 0, 1);
+        StartCoroutine(ScreenUpdateRoutine());
     }
 
 
-    public void GetStateVector()
+    IEnumerator ScreenUpdateRoutine()
     {
-        var task = circuit.GetProbabilitySummary();
+        var circuitManager = DataProvider.instance.circuitManager;
+        List<ITask> tasks = new List<ITask>();
+        while (true)
+        {
+            yield return new WaitUntil(()=>!circuitManager.updatedToHead);
+            yield return new WaitUntil(()=>circuitManager.updatedToHead);
+
+            var qc = circuitManager.BuildCircuit();
+            var probTask = qc.GetStateProbAsync();
+            var vecTask = qc.GetStateVectorAsync();
+
+            yield return new WaitUntil(()=>probTask.ready);
+            yield return new WaitUntil(()=>vecTask.ready);
+
+            stateVector.text = vecTask.result;
+            probTables.text = string.Join(",",probTask.result);
+            Debug.Log("updated");
+        }
+
+    }
+    public void RunCircuit()
+    {
+        var task = DataProvider.instance.circuitManager.BuildCircuit().RunAsync();
+
         StartCoroutine(CircuitTask(task));
     }
 
-    public void GetSummary()
-    {
-
-    }
-
-    public void RunCircuit()
-    {
-
-    }
-
-    IEnumerator CircuitTask(ITask task)
+    IEnumerator CircuitTask(ITask<CircuitMeasurementResult> task)
     {
         yield return new WaitUntil(() => task.ready);
+        resultField.text = task.result.GetOverview();
     }
 
 }

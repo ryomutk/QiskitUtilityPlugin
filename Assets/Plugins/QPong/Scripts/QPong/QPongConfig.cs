@@ -16,10 +16,4 @@ public class QPongConfig : SingleScriptableObject<QPongConfig>
     public float measurmentShowTime{get{return _measurmentShowTime;}}
     public float frictionRandomRange{get{return _frictionRandomRange;}}
     public float enemySpeed{get{return _enemySpeed;}}
-    public int register{get{return _register;}}
-    public Vector2 gap{get{return _gap;}}
-    [SerializeField]Vector2 _gap;
-    [SerializeField]int _orderNum = 9;
-    public int orderNum{get{return _orderNum;}}
-    public List<KeyBind> keyConfig;
 }

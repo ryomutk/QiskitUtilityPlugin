@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class DataProvider:Singleton<DataProvider>
 {
-    [SerializeField]QPongConfig config;
+    [SerializeField] ScriptableObject[] requireScriptables;
+    [SerializeField] int _registerNum;
+    protected virtual int registerNum{get{return _registerNum;}} 
     CircuitManager _circuitManager;
-    public CircuitManager circuit{get{return _circuitManager;}}
+    public CircuitManager circuitManager{get{return _circuitManager;}}
 
-    void Start()
+    protected override void Awake()
     {
-        _circuitManager = new CircuitManager(QPongConfig.instance.register);
+        base.Awake();
+        _circuitManager = new CircuitManager(registerNum);
     }
-
-
-
 }

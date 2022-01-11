@@ -44,7 +44,7 @@ public class QuantumCircuit
     /// this circuit is executed.
     /// </summary>
     /// <returns></returns>
-    public SmallTask<Dictionary<string,float>> GetProbabilitySummary()
+    public SmallTask<Dictionary<string,float>> GetStateProbAsync()
     {
         var str = circuitStr.ToString();
         str += "\n    return qc";

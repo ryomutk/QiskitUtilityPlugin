@@ -6,7 +6,32 @@ public class CircuitManager
 {
     Dictionary<int, Dictionary<int, Gates>> circuitTable = new Dictionary<int, Dictionary<int, Gates>>();
     int register;
-    public Dictionary<int, float> stateSummary = new Dictionary<int, float>();
+    SmallTask<Dictionary<string, float>>[] taskDoubleBuffer = new SmallTask<Dictionary<string, float>>[] { null, null };
+    public bool updatedToHead
+    {
+        get
+        {
+            SolveBuffer();
+            return taskDoubleBuffer[1] != null;
+        }
+    }
+    public Dictionary<string, float> stateSummary
+    {
+        get
+        {
+            SolveBuffer();
+            return taskDoubleBuffer[0].result;
+        }
+    }
+
+    void SolveBuffer()
+    {
+        if (taskDoubleBuffer[1] != null && taskDoubleBuffer[1].ready)
+        {
+            taskDoubleBuffer[0] = taskDoubleBuffer[1];
+            taskDoubleBuffer[1] = null;
+        }
+    }
 
     public CircuitManager(int register)
     {
@@ -14,9 +39,9 @@ public class CircuitManager
         for (int i = 0; i < register; i++)
         {
             circuitTable[i] = new Dictionary<int, Gates>();
-            stateSummary[i] = 0;
         }
-        
+        taskDoubleBuffer[0] = new SmallTask<Dictionary<string, float>>();
+        taskDoubleBuffer[0].result = new Dictionary<string, float>() { { "000", 1f } };
     }
 
     public Gates CheckGate(int qbit, int order)
@@ -44,28 +69,13 @@ public class CircuitManager
 
     void UpdateSummary()
     {
-        foreach (var line in circuitTable)
-        {
-            if (line.Value.ContainsValue(Gates.H))
-            {
-                stateSummary[line.Key] = 0.5f;
-            }
-            else
-            {
-                var count = line.Value.Count(x => x.Value == Gates.X);
-                if (count % 2 == 0)
-                {
-                    stateSummary[line.Key] = 0;
-                }
-                else
-                {
-                    stateSummary[line.Key] = 1;
-                }
-            }
-        }
+        var qc = BuildCircuit();
+        var task = qc.GetStateProbAsync();
+
+        taskDoubleBuffer[1] = task;
     }
 
-    public SmallTask<CircuitMeasurementResult> BuildAndRunAsync()
+    public QuantumCircuit BuildCircuit()
     {
         var qc = new QuantumCircuit(register);
         foreach (var line in circuitTable)
@@ -76,11 +86,17 @@ public class CircuitManager
             {
                 if (gate.Value != Gates.none)
                 {
-                    qc.AppendGate(gate.Value,num);
+                    qc.AppendGate(gate.Value, num);
                 }
             }
         }
 
+        return qc;
+    }
+
+    public SmallTask<CircuitMeasurementResult> BuildAndRunAsync()
+    {
+        var qc = BuildCircuit();
         return qc.RunAsync();
     }
 

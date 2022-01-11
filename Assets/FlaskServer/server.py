@@ -8,6 +8,8 @@ from api import get_state_vector
 from api import build_circuit
 from api import run_circuit
 from api import backend_configuration
+import re
+import math
 import json
 
 app = Flask(__name__)
@@ -52,7 +54,9 @@ def simulate_probability():
 
     output = dict()
     for dat in prob_table:
-        output[str(dat[0])] = dat[1]
+        label = str(dat[0])
+        label = re.sub(r"\D","",label)
+        output[label] = round(dat[1],5)
 
     return str(output)
 
