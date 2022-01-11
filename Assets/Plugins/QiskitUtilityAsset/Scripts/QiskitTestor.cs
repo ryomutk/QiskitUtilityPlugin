@@ -5,20 +5,31 @@ using UnityEngine;
 public class QiskitTestor : MonoBehaviour
 {
     QuantumCircuit circuit;
+    TMPro.TMP_Text logField;
 
     void Start()
     {
         circuit = new QuantumCircuit(3);
-        circuit.AppendGate(Gates.H,0);
-        circuit.AppendGate(Gates.H,1);
-        circuit.AppendGate(Gates.CX,0,1);
+        circuit.AppendGate(Gates.H, 0);
+        circuit.AppendGate(Gates.H, 1);
+        circuit.AppendGate(Gates.CX, 0, 1);
     }
 
 
+    public void GetStateVector()
+    {
+        var task = circuit.GetProbabilitySummary();
+        StartCoroutine(CircuitTask(task));
+    }
+
+    public void GetSummary()
+    {
+
+    }
+
     public void RunCircuit()
     {
-        var task = circuit.GetStateVectorAsync();
-        StartCoroutine(CircuitTask(task));
+
     }
 
     IEnumerator CircuitTask(ITask task)

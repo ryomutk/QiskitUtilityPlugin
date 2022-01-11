@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 public class QASMComunicator : Singleton<QASMComunicator>
@@ -27,17 +28,41 @@ public class QASMComunicator : Singleton<QASMComunicator>
     public SmallTask<string> GetStateVector(string circuit)
     {
         var task = new SmallTask<string>();
-        StartCoroutine(GetStatevector(circuit,task));
+        StartCoroutine(SimulateCircuit(circuit, task));
 
         return task;
     }
 
-    IEnumerator GetStatevector(string circuitString, SmallTask<string> task)
+    public SmallTask<Dictionary<string,float>> GetProbability(string circuit)
+    {
+        var task = new SmallTask<Dictionary<string,float>>();
+        StartCoroutine(GetStateProbability(circuit,task));
+        return task;
+    }
+
+    IEnumerator GetStateProbability(string circuitString, SmallTask<Dictionary<string, float>> task)
+    {
+        var task2 = new SmallTask<string>();
+        yield return StartCoroutine(SimulateCircuit(circuitString, task2,false));
+        
+        task.result = JsonConvert.DeserializeObject<Dictionary<string,float>>(task2.result);
+    }
+
+
+    IEnumerator SimulateCircuit(string circuitString, SmallTask<string> task, bool getStateVector = true)
     {
         var formData = new List<IMultipartFormSection>();
         formData.Add(new MultipartFormDataSection("circuit", circuitString));
 
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/simulate/statevector", formData);
+        UnityWebRequest www = null;
+        if (getStateVector)
+        {
+            www = UnityWebRequest.Post("http://127.0.0.1:8001/api/simulate/statevector", formData);
+        }
+        else
+        {
+            www = UnityWebRequest.Post("http://127.0.0.1:8001/api/simulate/probability", formData);
+        }
 
         yield return www.SendWebRequest();
         yield return new WaitUntil(() => www.isDone);

@@ -40,6 +40,20 @@ public class QuantumCircuit
     }
 
     /// <summary>
+    /// Get dictionry of probability of which states will likely be measured when
+    /// this circuit is executed.
+    /// </summary>
+    /// <returns></returns>
+    public SmallTask<Dictionary<string,float>> GetProbabilitySummary()
+    {
+        var str = circuitStr.ToString();
+        str += "\n    return qc";
+
+        return QASMComunicator.instance.GetProbability(str);
+    }
+
+
+    /// <summary>
     /// Get state vector of this Quantum Circuit in Bra-ket notation
     /// </summary>
     /// <returns></returns>

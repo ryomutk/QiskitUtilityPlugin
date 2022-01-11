@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-from logging import NullHandler
+from logging import NullHandler, debug
 from flask import request
 from flask import jsonify
 from flask import Flask
+from api import get_prob_table
 from api import get_state_vector
 from api import build_circuit
 from api import run_circuit
@@ -43,3 +44,18 @@ def simulate_statevector():
     qc = get_state_vector(circuit_string)
 
     return str(qc)
+
+@app.route('/api/simulate/probability',methods=['POST'])
+def simulate_probability():
+    circuit_string = request.form.get("circuit")
+    prob_table = get_prob_table(circuit_string)
+
+    output = dict()
+    for dat in prob_table:
+        output[str(dat[0])] = dat[1]
+
+    return str(output)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8001)

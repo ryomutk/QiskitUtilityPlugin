@@ -6,7 +6,7 @@ from qiskit import QuantumCircuit, Aer, execute, IBMQ
 from qiskit import circuit
 from qiskit.circuit import quantumcircuit, quantumregister
 from qiskit.providers import aer, backend
-from sympy.physics.quantum.qubit import matrix_to_qubit
+from sympy.physics.quantum.qubit import matrix_to_qubit,measure_all
 import numpy as np
 
 
@@ -41,8 +41,14 @@ def get_state_vector(circuit_string):
     result = job_statevector.result()
     statevector = result.get_statevector(qc)
     ket_vector = matrix_to_qubit(np.array(statevector)[:, np.newaxis])
-    
+
     return ket_vector
+
+def get_prob_table(circuit_string):
+    ket_vector = get_state_vector(circuit_string)
+    probs = measure_all(ket_vector)
+
+    return probs
 
 
 def build_circuit(circuit_string):
