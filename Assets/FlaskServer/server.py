@@ -3,8 +3,9 @@ from logging import NullHandler
 from flask import request
 from flask import jsonify
 from flask import Flask
+from api import get_state_vector
+from api import build_circuit
 from api import run_circuit
-from api import run_qasm
 from api import backend_configuration
 import json
 
@@ -29,12 +30,16 @@ def runStringCircuit():
 
     return jsonify(output)
 
-@app.route('/api/run/randomizer', methods=['POST'])
-def runRandomizer():
-    num = int(request.form.get("num"))
-    output = run_qasm(num)
+@app.route('/api/summary/circuit',methods=['POST'])
+def getcircuitSummary():
 
-    return jsonify(output)
+    circuit_string = request.form.get("circuit")
+    qc = build_circuit(circuit_string)
+    return str(qc)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8001)
+@app.route('/api/simulate/statevector',methods=['POST'])
+def simulate_statevector():
+    circuit_string = request.form.get("circuit")
+    qc = get_state_vector(circuit_string)
+
+    return str(qc)

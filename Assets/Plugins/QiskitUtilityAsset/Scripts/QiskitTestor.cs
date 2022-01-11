@@ -11,18 +11,17 @@ public class QiskitTestor : MonoBehaviour
         circuit = new QuantumCircuit(3);
         circuit.AppendGate(Gates.H,0);
         circuit.AppendGate(Gates.H,1);
-        circuit.AppendGate(Gates.H,2);
         circuit.AppendGate(Gates.CX,0,1);
     }
 
 
     public void RunCircuit()
     {
-        var task = circuit.RunAsync();
+        var task = circuit.GetStateVectorAsync();
         StartCoroutine(CircuitTask(task));
     }
 
-    IEnumerator CircuitTask(ITask<CircuitMeasurementResult> task)
+    IEnumerator CircuitTask(ITask task)
     {
         yield return new WaitUntil(() => task.ready);
     }

@@ -38,65 +38,31 @@ public class QuantumCircuit
 #endif
         }
     }
-    /*
-        public bool AppendGate(int targetQbit, Gates type, int indent = 0)
-        {
-            if (targetQbit < 0 && registerBit <= targetQbit)
-            {
-                throw new System.Exception("target is illegal");
-            }
 
-            //必ず一つインデントが入る
-            indent++;
-            for (int i = 0; i < indent; i++)
-            {
-                circuitStr.Append("    ");
-            }
+    /// <summary>
+    /// Get state vector of this Quantum Circuit in Bra-ket notation
+    /// </summary>
+    /// <returns></returns>
+    public SmallTask<string> GetStateVectorAsync()
+    {
+        var str = circuitStr.ToString();
+        str += "\n    return qc";
 
-            if (GateSetting.instance.singleArgMethodDefine.TryGetItem(type, out string methodStr))
-            {
-                circuitStr.AppendFormat(methodStr, targetQbit);
-                circuitStr.AppendLine();
-                return true;
-            }
-            else
-            {
-    #if DEBUG
-                throw new System.Exception("Single arg method of gate type " + type + " is not defined!");
-    #endif
-            }
+        return QASMComunicator.instance.GetStateVector(str);
+    }
 
-        }
-        public bool AppendGate(int firstTarget, int secondTarget, Gates type, int indent = 0)
-        {
-            if (!CheckTargetBit(firstTarget) || !CheckTargetBit(secondTarget))
-            {
-                throw new System.Exception("target is illegal");
-            }
+    /// <summary>
+    /// Get summary string of this Quamtum Circuit
+    /// </summary>
+    /// <returns></returns>
+    public SmallTask<string> GetCircuitSummaryAsync()
+    {
+        var str = circuitStr.ToString();
+        str += "\n    qc.measure(qr,cr)";
+        str += "\n    return qc";
+        return QASMComunicator.instance.GetCircuitSummary(str);
+    }
 
-            //必ず一つインデントが入る
-            indent++;
-            for (int i = 0; i < indent; i++)
-            {
-                circuitStr.Append("    ");
-            }
-
-            if (GateSetting.instance.doubleArgMethodDefine.TryGetItem(type, out string methodStr))
-            {
-                circuitStr.AppendFormat(methodStr, firstTarget, secondTarget);
-                circuitStr.AppendLine();
-                return true;
-            }
-            else
-            {
-    #if DEBUG
-                UnityEngine.Debug.LogWarning("Double arg method of gate type " + type + " is not defined!");
-    #endif
-                return false;
-            }
-
-        }
-    */
     bool CheckTargetBit(int targetQbit)
     {
         return targetQbit >= 0 && registerBit > targetQbit;

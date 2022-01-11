@@ -6,25 +6,72 @@ using Newtonsoft.Json;
 
 public class QASMComunicator : Singleton<QASMComunicator>
 {
-    //[SerializeField] float amplifier = 1.2f;
     [SerializeField] CircuitConfig circuitConfig;
     [SerializeField] GateSetting gateSetting;
-
-    /*
-    public SmallTask<float[]> GetRandomArrayTask(int shots)
-    {
-        var task = new SmallTask<float[]>();
-        StartCoroutine(GetResult(shots, task));
-
-        return task;
-    }
-    */
 
     public SmallTask<CircuitMeasurementResult> RunCircuitAsync(string method)
     {
         var task = new SmallTask<CircuitMeasurementResult>();
         StartCoroutine(RunCircuit(method, task));
         return task;
+    }
+
+    public SmallTask<string> GetCircuitSummary(string circuit)
+    {
+        var task = new SmallTask<string>();
+        StartCoroutine(GetCircuitSummary(circuit, task));
+
+        return task;
+    }
+
+    public SmallTask<string> GetStateVector(string circuit)
+    {
+        var task = new SmallTask<string>();
+        StartCoroutine(GetStatevector(circuit,task));
+
+        return task;
+    }
+
+    IEnumerator GetStatevector(string circuitString, SmallTask<string> task)
+    {
+        var formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormDataSection("circuit", circuitString));
+
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/simulate/statevector", formData);
+
+        yield return www.SendWebRequest();
+        yield return new WaitUntil(() => www.isDone);
+
+        var result = www.downloadHandler.text;
+        if (task != null)
+        {
+            task.result = result;
+        }
+
+#if DEBUG
+        Debug.Log(result);
+#endif
+    }
+
+    IEnumerator GetCircuitSummary(string circuitString, SmallTask<string> task = null)
+    {
+        var formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormDataSection("circuit", circuitString));
+
+        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/summary/circuit", formData);
+
+        yield return www.SendWebRequest();
+        yield return new WaitUntil(() => www.isDone);
+
+        var result = www.downloadHandler.text;
+        if (task != null)
+        {
+            task.result = result;
+        }
+
+#if DEBUG
+        Debug.Log(result);
+#endif
     }
 
     IEnumerator RunCircuit(string method, SmallTask<CircuitMeasurementResult> task = null)
@@ -54,40 +101,4 @@ public class QASMComunicator : Singleton<QASMComunicator>
         yield return null;
     }
 
-    /*
-    IEnumerator GetResult(int num, SmallTask<float[]> task)
-    {
-        var formdata = new List<IMultipartFormSection>();
-        formdata.Add(new MultipartFormDataSection("num", num.ToString()));
-
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/run/randomizer", formdata);
-
-        yield return www.SendWebRequest();
-
-        yield return new WaitUntil(() => www.isDone);
-
-        var result = www.downloadHandler.text;
-        var data = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, int>>>(result);
-
-        Debug.Log(result);
-
-        task.result = ParseData(data);
-    }
-
-    float[] ParseData(Dictionary<string, Dictionary<string, int>> rawResult)
-    {
-        var result = new float[rawResult.Count];
-        var count = 0;
-        foreach (var resultPair in rawResult)
-        {
-            var percentage = resultPair.Value["0"] * 2 / 1024f - 1;
-            percentage *= amplifier;
-            result[count] = percentage;
-            count++;
-        }
-
-
-        return result;
-    }
-    */
 }
