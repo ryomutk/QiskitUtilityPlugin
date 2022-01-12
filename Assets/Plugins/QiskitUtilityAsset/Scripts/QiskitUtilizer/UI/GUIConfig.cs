@@ -5,7 +5,7 @@ using QiskitPlugin.Input;
 namespace QiskitPlugin.UI
 {
     [CreateAssetMenu(menuName = "config/GUIConfig")]
-    public class GUIConfig : SingleScriptableObject<GUIConfig>
+    public class GUIConfig : ScriptableObject
     {
         public Vector2 gap { get { return _gap; } }
         public int orderNum { get { return _orderNum; } }

@@ -17,10 +17,10 @@ namespace QiskitPlugin.UI
         [SerializeField] Cursor cursor;
         //初期化に使うQiskitRegisterの数
         [SerializeField] int defaultRegister = 3;
+        [SerializeField] GUIConfig config;
 
         Vector2Int cPos = Vector2Int.zero;
         Vector2 gap { get { return config.gap; } }
-        GUIConfig config { get { return GUIConfig.instance; } }
         int nowRegister { get; set; }
         Image[,] imageComplex;
 
