@@ -1066,6 +1066,7 @@ MonoBehaviour:
   barPref: {fileID: 429779168, guid: 203e31ead026c6a47836927cdeece791, type: 3}
   barMother: {fileID: 790639760}
   cursor: {fileID: 263346601}
+  defaultRegister: 3
 --- !u!114 &836954690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,7 +1080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DDOL: 1
-  requireScriptables: []
+  requireScriptables:
+  - {fileID: 11400000, guid: 938378227e48fba4dbb282dc268336ad, type: 2}
   _registerNum: 3
 --- !u!1 &1318816172
 GameObject:

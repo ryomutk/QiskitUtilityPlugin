@@ -3,113 +3,116 @@ using System;
 using Newtonsoft.Json;
 using System.Linq;
 
-public class CircuitMeasurementResult
+namespace QiskitPlugin
 {
-    public Dictionary<string, int> rawResult { get; private set; }
-
-    /// <summary>
-    /// Probabilitys of each qubits appeared in measurement
-    /// </summary>
-    /// <value></value>
-    public Dictionary<int, float> bitProbTable { get; set; }
-    public int bitLength { get; private set; }
-    public string resultString { get; private set; }
-    public int shots { get; private set; }
-    public string[] maxStates{get;private set;}
-    public int maxCount{get;private set;}
-
-    public string GetOverview()
+    public class CircuitMeasurementResult
     {
-        System.Text.StringBuilder log = new System.Text.StringBuilder();
-        log.AppendFormat("{0,-20}","Raw Result:");
-        log.AppendLine(resultString);
-        log.AppendFormat("{0,-20}","bit length:");
-        log.AppendLine(bitLength.ToString());
-        log.AppendFormat("{0,-20}","Total Shots:");
-        log.AppendLine(shots.ToString());
-        log.AppendFormat("{0,-20}","Max State(s):");
-        log.Append("[").Append(string.Join(",",maxStates)).AppendLine("]");
-        log.AppendFormat("{0,-20}",">By Count:");
-        log.AppendLine(maxCount.ToString());
-        log.AppendFormat("{0,-20}","QBit Probs:");
-        log.Append("[").Append(string.Join(",",bitProbTable)).AppendLine("]");
-        return log.ToString();
-    }
+        public Dictionary<string, int> rawResult { get; private set; }
 
-    //get Existence probability of selected qubit
-    public float GetProbability(int n)
-    {
-        if (n >= bitLength)
+        /// <summary>
+        /// Probabilitys of each qubits appeared in measurement
+        /// </summary>
+        /// <value></value>
+        public Dictionary<int, float> bitProbTable { get; set; }
+        public int bitLength { get; private set; }
+        public string resultString { get; private set; }
+        public int shots { get; private set; }
+        public string[] maxStates { get; private set; }
+        public int maxCount { get; private set; }
+
+        public string GetOverview()
         {
+            System.Text.StringBuilder log = new System.Text.StringBuilder();
+            log.AppendFormat("{0,-20}", "Raw Result:");
+            log.AppendLine(resultString);
+            log.AppendFormat("{0,-20}", "bit length:");
+            log.AppendLine(bitLength.ToString());
+            log.AppendFormat("{0,-20}", "Total Shots:");
+            log.AppendLine(shots.ToString());
+            log.AppendFormat("{0,-20}", "Max State(s):");
+            log.Append("[").Append(string.Join(",", maxStates)).AppendLine("]");
+            log.AppendFormat("{0,-20}", ">By Count:");
+            log.AppendLine(maxCount.ToString());
+            log.AppendFormat("{0,-20}", "QBit Probs:");
+            log.Append("[").Append(string.Join(",", bitProbTable)).AppendLine("]");
+            return log.ToString();
+        }
+
+        //get Existence probability of selected qubit
+        public float GetProbability(int n)
+        {
+            if (n >= bitLength)
+            {
+                return 0;
+            }
+            else if (bitProbTable.ContainsKey(n))
+            {
+                return bitProbTable[n];
+            }
+
             return 0;
         }
-        else if (bitProbTable.ContainsKey(n))
+
+        public CircuitMeasurementResult(string resultStr)
         {
-            return bitProbTable[n];
+            this.rawResult = JsonConvert.DeserializeObject<Dictionary<string, int>>(resultStr);
+            this.resultString = resultStr;
+
+            InitData();
         }
 
-        return 0;
-    }
-
-    public CircuitMeasurementResult(string resultStr)
-    {
-        this.rawResult = JsonConvert.DeserializeObject<Dictionary<string, int>>(resultStr);
-        this.resultString = resultStr;
-
-        InitData();
-    }
-
-    void InitData()
-    {
-        bitProbTable = new Dictionary<int, float>();
-
-        bitLength = rawResult.Max(x=>x.Key.Length);
-        shots = rawResult.Sum(x=>x.Value);
-        maxCount = rawResult.Max(x=>x.Value);
-        maxStates = rawResult.Where(x=>x.Value==maxCount).ToDictionary(x=>x.Key,x=>x.Value).Keys.ToArray();
-
-        Dictionary<int, int> countTable = new Dictionary<int, int>();
-        for (int i = 0; i < bitLength; i++)
+        void InitData()
         {
-            countTable[i] = 0;
-        }
-        foreach (var item in rawResult)
-        {
-            /*
-            var state = int.Parse(item.Key);
-            var th = state / 100;
-            var sec = (state - th * 100) / 10;
-            var mono = state - th * 100 - sec * 10;
-            */
-            var resultFlag = Convert.ToInt32(item.Key, 2);
+            bitProbTable = new Dictionary<int, float>();
 
+            bitLength = rawResult.Max(x => x.Key.Length);
+            shots = rawResult.Sum(x => x.Value);
+            maxCount = rawResult.Max(x => x.Value);
+            maxStates = rawResult.Where(x => x.Value == maxCount).ToDictionary(x => x.Key, x => x.Value).Keys.ToArray();
+
+            Dictionary<int, int> countTable = new Dictionary<int, int>();
             for (int i = 0; i < bitLength; i++)
             {
-                var targetBit = (int)Math.Pow(2, i);
-                if (BitFlagSolver.HasFlag(resultFlag, targetBit))
+                countTable[i] = 0;
+            }
+            foreach (var item in rawResult)
+            {
+                /*
+                var state = int.Parse(item.Key);
+                var th = state / 100;
+                var sec = (state - th * 100) / 10;
+                var mono = state - th * 100 - sec * 10;
+                */
+                var resultFlag = Convert.ToInt32(item.Key, 2);
+
+                for (int i = 0; i < bitLength; i++)
                 {
-                    countTable[i] += item.Value;
+                    var targetBit = (int)Math.Pow(2, i);
+                    if (BitFlagSolver.HasFlag(resultFlag, targetBit))
+                    {
+                        countTable[i] += item.Value;
+                    }
                 }
             }
-        }
 
-        foreach (var item in countTable)
-        {
-            bitProbTable[item.Key] = item.Value / (float)shots;
-        }
-    }
-
-    public float GetRate(int flags)
-    {
-        foreach (var data in rawResult)
-        {
-            if (flags == int.Parse(data.Key))
+            foreach (var item in countTable)
             {
-                return data.Value / shots;
+                bitProbTable[item.Key] = item.Value / (float)shots;
             }
         }
 
-        return 0;
-    }
+        public float GetRate(int flags)
+        {
+            foreach (var data in rawResult)
+            {
+                if (flags == int.Parse(data.Key))
+                {
+                    return data.Value / shots;
+                }
+            }
 
+            return 0;
+        }
+
+    }
 }

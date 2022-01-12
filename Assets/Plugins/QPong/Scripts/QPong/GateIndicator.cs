@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using QiskitPlugin.Utility;
+using QiskitPlugin;
 
 public class GateIndicator : MonoBehaviour
 {

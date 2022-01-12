@@ -13,21 +13,6 @@ MonoBehaviour:
   m_Name: QpConfig
   m_EditorClassIdentifier: 
   _register: 3
-  _enemySpeed: 1
+  _enemySpeed: 4
   _frictionRandomRange: 10
   _measurmentShowTime: 0.7
-  _gap: {x: 70, y: 50}
-  _orderNum: 9
-  keyConfig:
-  - key: 273
-    id: 3
-  - key: 274
-    id: 4
-  - key: 276
-    id: 6
-  - key: 275
-    id: 5
-  - key: 122
-    id: 2
-  - key: 120
-    id: 1

@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  m_configObjects: {}
+  - enabled: 0
+    path: Assets/Scenes/QPongNewGen.unity
+    guid: 6cc926afd0df48c45a5491d3c3b4f1e2
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: e5aaf0c22ceb71a4c8d90aed2b1d32fc, type: 2}

@@ -1,9 +1,12 @@
-public enum Gates
+namespace QiskitPlugin
 {
-    none,
-    X,
-    Z,
-    H,
-    CX,
-    CZ
+    public enum Gates
+    {
+        none,
+        X,
+        Z,
+        H,
+        CX,
+        CZ
+    }
 }
