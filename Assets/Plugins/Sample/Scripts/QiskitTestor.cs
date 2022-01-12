@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using QiskitPlugin.Utility;
+using QiskitPlugin;
 
 public class QiskitTestor : MonoBehaviour
 {
