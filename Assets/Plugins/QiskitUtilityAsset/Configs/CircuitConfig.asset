@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05411919f738b249b211c3dcba3e514, type: 3}
+  m_Script: {fileID: 11500000, guid: 19bc21eb737796d4687e6768221fa08d, type: 3}
   m_Name: CircuitConfig
   m_EditorClassIdentifier: 
   _shots: 10
+  _register: 3

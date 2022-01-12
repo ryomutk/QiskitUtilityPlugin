@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5dbf4d70148064b8764c43d74ffe78, type: 3}
+  m_Script: {fileID: 11500000, guid: ba978b68b0706ef458874c3fe1254020, type: 3}
   m_Name: GateSetting
   m_EditorClassIdentifier: 
   _methodDefine:
