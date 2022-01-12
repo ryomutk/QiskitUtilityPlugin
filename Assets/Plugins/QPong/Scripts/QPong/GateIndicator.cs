@@ -8,8 +8,9 @@ using QiskitPlugin;
 public class GateIndicator : MonoBehaviour
 {
     BallSlider[] sliders;
+    CircuitBuilder circuit;
     void Start()
-    {
+    {   CircuitProvider.instance.CreateCircuit(3,out circuit);
         sliders = GetComponentsInChildren<BallSlider>();
         foreach (var item in sliders)
         {
@@ -31,7 +32,7 @@ public class GateIndicator : MonoBehaviour
     IEnumerator MesurementRoutine(Ball ball)
     {
         ball.Pause();
-        var task = CircuitProvider.instance.circuits[0].BuildAndRunAsync();
+        var task = circuit.BuildAndRunAsync();
         yield return new WaitUntil(() => task.ready);
 
         ShowResult(task.result);
@@ -67,14 +68,14 @@ public class GateIndicator : MonoBehaviour
     IEnumerator UpdateRoutine()
     {
         Dictionary<string, float> summary = null;
-        while (CircuitProvider.instance.circuits[0].updatedToHead)
+        while (circuit.updatedToHead)
         {
             yield return null;
-            summary = CircuitProvider.instance.circuits[0].stateSummary;
+            summary = circuit.stateSummary;
         }
         if(summary==null)
         {
-            summary=CircuitProvider.instance.circuits[0].stateSummary;
+            summary=circuit.stateSummary;
         }
 
 

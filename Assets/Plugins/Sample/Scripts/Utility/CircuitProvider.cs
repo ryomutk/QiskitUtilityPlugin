@@ -5,7 +5,7 @@ namespace QiskitPlugin.Utility
     public class CircuitProvider : Singleton<CircuitProvider>
     {
         [SerializeField] ScriptableObject[] requireScriptables;
-        List<CircuitBuilder> _circuits;
+        List<CircuitBuilder> _circuits = new List<CircuitBuilder>();
         public List<CircuitBuilder> circuits { get { return _circuits; } }
 
         protected override void Awake()

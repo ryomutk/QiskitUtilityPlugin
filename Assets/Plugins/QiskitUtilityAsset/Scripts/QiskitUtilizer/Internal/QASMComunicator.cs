@@ -23,7 +23,6 @@ namespace QiskitPlugin.Internal
             {
                 string path = Application.dataPath + "/StreamingAssets/FlaskServer/build/exe.win-amd64-3.9/server.exe";
                 process = new System.Diagnostics.Process();
-                process.StartInfo.CreateNoWindow = true;
                 process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
                 process.StartInfo.FileName = path;
                 process.Start();
