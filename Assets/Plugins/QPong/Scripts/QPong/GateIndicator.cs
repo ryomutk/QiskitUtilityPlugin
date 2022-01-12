@@ -31,7 +31,7 @@ public class GateIndicator : MonoBehaviour
     IEnumerator MesurementRoutine(Ball ball)
     {
         ball.Pause();
-        var task = DataProvider.instance.circuitManager.BuildAndRunAsync();
+        var task = DataProvider.instance.circuitBuilder.BuildAndRunAsync();
         yield return new WaitUntil(() => task.ready);
 
         ShowResult(task.result);
@@ -67,14 +67,14 @@ public class GateIndicator : MonoBehaviour
     IEnumerator UpdateRoutine()
     {
         Dictionary<string, float> summary = null;
-        while (DataProvider.instance.circuitManager.updatedToHead)
+        while (DataProvider.instance.circuitBuilder.updatedToHead)
         {
             yield return null;
-            summary = DataProvider.instance.circuitManager.stateSummary;
+            summary = DataProvider.instance.circuitBuilder.stateSummary;
         }
         if(summary==null)
         {
-            summary=DataProvider.instance.circuitManager.stateSummary;
+            summary=DataProvider.instance.circuitBuilder.stateSummary;
         }
 
 

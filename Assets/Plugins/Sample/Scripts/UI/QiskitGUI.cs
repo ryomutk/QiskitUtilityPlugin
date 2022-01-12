@@ -78,7 +78,7 @@ namespace QiskitPlugin.UI
 
         }
 
-        CircuitBuilder circuit { get { return DataProvider.instance.circuitManager; } }
+        CircuitBuilder circuit { get { return DataProvider.instance.circuitBuilder; } }
         void InputAction(InputID id)
         {
             switch (id)

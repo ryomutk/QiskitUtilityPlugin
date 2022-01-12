@@ -6,13 +6,13 @@ namespace QiskitPlugin.Utility
         [SerializeField] ScriptableObject[] requireScriptables;
         [SerializeField] int _registerNum;
         protected virtual int registerNum { get { return _registerNum; } }
-        CircuitBuilder _circuitManager;
-        public CircuitBuilder circuitManager { get { return _circuitManager; } }
+        CircuitBuilder _circuitBuilder;
+        public CircuitBuilder circuitBuilder { get { return _circuitBuilder; } }
 
         protected override void Awake()
         {
             base.Awake();
-            _circuitManager = new CircuitBuilder(registerNum);
+            _circuitBuilder = new CircuitBuilder(registerNum);
         }
     }
 }

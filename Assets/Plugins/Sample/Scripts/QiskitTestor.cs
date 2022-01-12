@@ -19,7 +19,7 @@ public class QiskitTestor : MonoBehaviour
 
     IEnumerator ScreenUpdateRoutine()
     {
-        var circuitManager = DataProvider.instance.circuitManager;
+        var circuitManager = DataProvider.instance.circuitBuilder;
         List<ITask> tasks = new List<ITask>();
         while (true)
         {
@@ -41,7 +41,7 @@ public class QiskitTestor : MonoBehaviour
     }
     public void RunCircuit()
     {
-        var task = DataProvider.instance.circuitManager.BuildCircuit().RunAsync();
+        var task = DataProvider.instance.circuitBuilder.BuildCircuit().RunAsync();
 
         StartCoroutine(CircuitTask(task));
     }
