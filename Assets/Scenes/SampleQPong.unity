@@ -3627,11 +3627,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XTex: {fileID: 21300000, guid: c26770ad2f5791946ac982b7e903aa22, type: 3}
   HTex: {fileID: 21300000, guid: 7b13a16133425334db1635f3264ac679, type: 3}
+  ZTex: {fileID: 0}
   imagePref: {fileID: 1015824314224578456, guid: c30f39c0920760740817f195c6984774, type: 3}
   barPref: {fileID: 429779168, guid: 203e31ead026c6a47836927cdeece791, type: 3}
   barMother: {fileID: 1692131530}
   cursor: {fileID: 467838320}
   defaultRegister: 3
+  config: {fileID: 11400000, guid: 2204993757cc4cd4e9520351e4aa831a, type: 2}
   indicator: {fileID: 660011071}
 --- !u!1 &2126512696
 GameObject:

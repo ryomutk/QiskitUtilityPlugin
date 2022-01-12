@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -9,8 +11,8 @@ namespace QiskitPlugin.UI
     public class QiskitGUI : MonoBehaviour
     {
         Vector2 pointer = Vector2.zero;
-        [SerializeField] Sprite XTex;
-        [SerializeField] Sprite HTex;
+        [SerializeField] SerializableDictionary<Gates, Sprite> gateTexs;
+        [SerializeField] Sprite controllTex;
         [SerializeField] Image imagePref;
         [SerializeField] InputBar barPref;
         [SerializeField] Transform barMother;
@@ -18,6 +20,7 @@ namespace QiskitPlugin.UI
         //初期化に使うQiskitRegisterの数
         [SerializeField] int defaultRegister = 3;
         [SerializeField] GUIConfig config;
+
 
         Vector2Int cPos = Vector2Int.zero;
         Vector2 gap { get { return config.gap; } }
@@ -99,32 +102,41 @@ namespace QiskitPlugin.UI
                     cPos.y += 1;
                     UpdateCursor();
                     break;
-                case InputID.hGate:
-                    if (circuit.CheckGate(cPos.y, cPos.x) == Gates.H)
+                /*
+                *ここまでにGate以外の処理を書く
+                *
+                */
+                default:
+                    var gate = Config.GateSetting.InputToGate(id);
+                    if (circuit.CheckGate(cPos.x, cPos.y) == gate)
                     {
-                        circuit.RemoveAt(cPos.y, cPos.x);
-                        UpdateGate(cPos, Gates.none);
+                        circuit.RemoveAt(cPos.x, cPos.y);
+                        controllBuffer = null;
+                    }
+                    else if (circuit.IsControllGate(gate))
+                    {
+                        if (controllBuffer == null)
+                        {
+                            controllBuffer = new Vector2Int(cPos.x, cPos.y);
+                        }
+                        else if (controllBuffer.Value.x == cPos.x && (controllBuffer.Value.y - 1 == cPos.y || controllBuffer.Value.y + 1 == cPos.y))
+                        {
+                            circuit.AppendMultiCGate(gate, cPos.x, cPos.y, controllBuffer.Value.y);
+                            controllBuffer = null;
+                        }
                     }
                     else
                     {
-                        circuit.AppendAt(cPos.y, cPos.x, Gates.H);
-                        UpdateGate(cPos, Gates.H);
+                        circuit.AppendAt(cPos.x, cPos.y, gate);
+                        controllBuffer = null;
                     }
-                    break;
-                case InputID.xGate:
-                    if (circuit.CheckGate(cPos.y, cPos.x) == Gates.X)
-                    {
-                        circuit.RemoveAt(cPos.y, cPos.x);
-                        UpdateGate(cPos, Gates.none);
-                    }
-                    else
-                    {
-                        circuit.AppendAt(cPos.y, cPos.x, Gates.X);
-                        UpdateGate(cPos, Gates.X);
-                    }
+                    UpdateGate(cPos);
+
                     break;
             }
         }
+
+        Vector2Int? controllBuffer = null;
 
         void UpdateCursor()
         {
@@ -162,24 +174,36 @@ namespace QiskitPlugin.UI
 
         protected virtual void AfterUpdate() { }
 
-        protected void UpdateGate(Vector2Int position, Gates gate)
+        protected void UpdateGate(Vector2Int position)
         {
 
-            var img = imageComplex[position.x, position.y];
-            switch (gate)
+            //縦方向に更新。横のつながりはないので
+            for (int i = 0; i < circuit.register; i++)
             {
-                case Gates.X:
-                    img.gameObject.SetActive(true);
-                    img.sprite = XTex;
-                    break;
-                case Gates.H:
-                    img.gameObject.SetActive(true);
-                    img.sprite = HTex;
-                    break;
-                case Gates.none:
+                var img = imageComplex[i, position.y];
+                var gate = circuit.CheckGate(i, position.y);
+                if (gate == Gates.none)
+                {
                     img.gameObject.SetActive(false);
-                    break;
+                }
+                else
+                {
+                    if (circuit.IsControllGate(gate))
+                    {
+                        if (!circuit.IsTargetQubit(i, position.y))
+                        {
+                            img.sprite = controllTex;
+                        }
+                    }
+                    else
+                    {
+                        img.sprite = gateTexs[gate];
+                    }
+
+                    img.gameObject.SetActive(true);
+                }
             }
+
             AfterUpdate();
         }
     }

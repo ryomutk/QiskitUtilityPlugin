@@ -37,6 +37,7 @@ namespace QiskitPlugin
             }
             else
             {
+                return false;
                 throw new System.Exception("Multiple arg method of gate type " + type + " is not defined!");
             }
         }

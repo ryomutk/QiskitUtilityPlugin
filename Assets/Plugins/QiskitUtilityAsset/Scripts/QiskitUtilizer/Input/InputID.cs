@@ -3,11 +3,14 @@ namespace QiskitPlugin.Input
     public enum InputID
     {
         none,
-        xGate,
-        hGate,
+        X,
+        H,
         up,
         down,
         right,
-        left
+        left,
+        Z,
+        CX,
+        CZ
     }
 }

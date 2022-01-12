@@ -7,6 +7,6 @@ namespace QiskitPlugin
         Z,
         H,
         CX,
-        CZ
+        CZ,
     }
 }

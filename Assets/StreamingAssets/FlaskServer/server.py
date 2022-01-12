@@ -26,7 +26,8 @@ def backend_config():
 def runStringCircuit():
     circuit_string = request.form.get("circuit")
     shots = int(request.form.get("shots"))
-    output = run_circuit(circuit_string,shots=shots)
+    backend = int(request.form.get("backend"))
+    output = run_circuit(circuit_string,shots=shots,backend_to_run=backend)
 
 
     return jsonify(output)

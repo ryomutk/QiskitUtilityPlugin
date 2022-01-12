@@ -123,6 +123,7 @@ namespace QiskitPlugin.Internal
             var formdata = new List<IMultipartFormSection>();
             formdata.Add(new MultipartFormDataSection("circuit", method));
             formdata.Add(new MultipartFormDataSection("shots", circuitConfig.shots.ToString()));
+            formdata.Add(new MultipartFormDataSection("backend",circuitConfig.backend));
 
             UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/run/circuit", formdata);
 

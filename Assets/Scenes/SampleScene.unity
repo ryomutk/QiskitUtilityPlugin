@@ -1430,6 +1430,62 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1974536629}
     m_Modifications:
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: ZTex
+      value: 
+      objectReference: {fileID: 21300000, guid: be540b1017e15d744a4ba39dec65e77f, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: controllUp
+      value: 
+      objectReference: {fileID: 21300000, guid: 360c7d4837e1c604dbb28acaf3655c66, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: controllDown
+      value: 
+      objectReference: {fileID: 21300000, guid: e0ae22e2b9042e246a7bb9de9ffe8d44, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[0]._key
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[1]._key
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[2]._key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[3]._key
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[4]._key
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[0]._value
+      value: 
+      objectReference: {fileID: 21300000, guid: c26770ad2f5791946ac982b7e903aa22, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[1]._value
+      value: 
+      objectReference: {fileID: 21300000, guid: be540b1017e15d744a4ba39dec65e77f, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[2]._value
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b13a16133425334db1635f3264ac679, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[3]._value
+      value: 
+      objectReference: {fileID: 21300000, guid: c26770ad2f5791946ac982b7e903aa22, type: 3}
+    - target: {fileID: 7026819656338252730, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
+      propertyPath: gateTexs.rawData.Array.data[4]._value
+      value: 
+      objectReference: {fileID: 21300000, guid: be540b1017e15d744a4ba39dec65e77f, type: 3}
     - target: {fileID: 7026819656338252731, guid: 024baf685abc7d9408b0ec35b2fa188d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

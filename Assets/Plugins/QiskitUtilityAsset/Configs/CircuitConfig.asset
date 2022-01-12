@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shots: 10
   _register: 3
+  _backend: qasm_simulator
