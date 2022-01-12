@@ -7,7 +7,9 @@ where T:class
 
 public class SmallTask:ITask
 {
+    static SmallTask nullTask = new SmallTask(){ready = true};
     public bool ready{get;set;}
+    public static SmallTask NullTask{get{return nullTask;}}
 
     public SmallTask()
     {
