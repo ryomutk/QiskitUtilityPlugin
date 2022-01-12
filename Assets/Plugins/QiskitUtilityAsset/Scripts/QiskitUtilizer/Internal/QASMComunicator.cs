@@ -10,8 +10,10 @@ namespace QiskitPlugin.Internal
 {
     public class QASMComunicator : Singleton<QASMComunicator>
     {
-        [SerializeField] CircuitConfig circuitConfig;
-        [SerializeField] GateSetting gateSetting;
+        public CircuitConfig circuitConfig{get{return _circuitConfig;}}
+        public GateSetting gateSetting{get{return _gateSetting;}}
+        [SerializeField] CircuitConfig _circuitConfig;
+        [SerializeField] GateSetting _gateSetting;
         [SerializeField] bool autoStartServer = true;
         System.Diagnostics.Process process = null;
 
@@ -121,7 +123,7 @@ namespace QiskitPlugin.Internal
         {
             var formdata = new List<IMultipartFormSection>();
             formdata.Add(new MultipartFormDataSection("circuit", method));
-            formdata.Add(new MultipartFormDataSection("shots", CircuitConfig.instance.shots.ToString()));
+            formdata.Add(new MultipartFormDataSection("shots", circuitConfig.shots.ToString()));
 
             UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8001/api/run/circuit", formdata);
 

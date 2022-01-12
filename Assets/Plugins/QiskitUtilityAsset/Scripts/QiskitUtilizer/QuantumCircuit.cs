@@ -29,7 +29,7 @@ namespace QiskitPlugin
                 circuitStr.Append("    ");
             }
 
-            if (GateSetting.instance.methodDifine.TryGetItem(type, out string methodStr))
+            if (QASMComunicator.instance.gateSetting.methodDifine.TryGetItem(type, out string methodStr))
             {
                 circuitStr.AppendFormat(methodStr, arguments.Select(x => x.ToString()).ToArray());
                 circuitStr.AppendLine();
