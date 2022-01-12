@@ -10,6 +10,7 @@ public class QiskitTestor : MonoBehaviour
     [SerializeField] TMP_Text resultField;
     [SerializeField] TMP_Text stateVector;
     [SerializeField] TMP_Text probTables;
+    int circuitIndex;
 
     void Start()
     {
@@ -19,14 +20,16 @@ public class QiskitTestor : MonoBehaviour
 
     IEnumerator ScreenUpdateRoutine()
     {
-        var circuitManager = DataProvider.instance.circuitBuilder;
+        CircuitBuilder circuit;
+        circuitIndex = CircuitProvider.instance.CreateCircuit(3,out circuit);
+
         List<ITask> tasks = new List<ITask>();
         while (true)
         {
-            yield return new WaitUntil(()=>!circuitManager.updatedToHead);
-            yield return new WaitUntil(()=>circuitManager.updatedToHead);
+            yield return new WaitUntil(()=>!circuit.updatedToHead);
+            yield return new WaitUntil(()=>circuit.updatedToHead);
 
-            var qc = circuitManager.BuildCircuit();
+            var qc = circuit.BuildCircuit();
             var probTask = qc.GetStateProbAsync();
             var vecTask = qc.GetStateVectorAsync();
 
@@ -41,7 +44,7 @@ public class QiskitTestor : MonoBehaviour
     }
     public void RunCircuit()
     {
-        var task = DataProvider.instance.circuitBuilder.BuildCircuit().RunAsync();
+        var task = CircuitProvider.instance.circuits[circuitIndex].BuildCircuit().RunAsync();
 
         StartCoroutine(CircuitTask(task));
     }
