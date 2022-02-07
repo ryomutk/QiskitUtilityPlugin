@@ -6,14 +6,20 @@ public class Ball : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        body.AddForce(-Vector2.one * 1000);
         body.sharedMaterial.friction = 0;
+    }
+
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        EventManager.instance.Notice(EventName.BallEvent, new BallEventArg(BallAction.bounce));
     }
 
     public void Restart()
     {
         body.velocity = Vector2.zero;
-        body.AddForce(-Vector2.one * 1000);
+        var rand = Random.Range(-20, 20);
+        body.sharedMaterial.friction = 0;
+        body.AddForce((Quaternion.Euler(0, 0, rand) * Vector2.left) * QPongConfig.instance.ballShotPower);
     }
 
     Vector2 lastVelo;

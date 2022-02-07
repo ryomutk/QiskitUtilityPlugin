@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bc21eb737796d4687e6768221fa08d, type: 3}
   m_Name: CircuitConfig
   m_EditorClassIdentifier: 
-  _shots: 10
-  _register: 3
+  _shots: 100
+  _backend: qasm_simulator

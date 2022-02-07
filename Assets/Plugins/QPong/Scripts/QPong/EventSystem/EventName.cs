@@ -2,5 +2,6 @@ public enum EventName
 {
     none,
     BallEvent,
-    ScoreEvent
+    DamageEvent,
+    GameEvent
 }

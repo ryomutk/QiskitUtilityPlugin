@@ -1,6 +1,5 @@
 using System.ComponentModel;
-public interface IEventListener<T>
-where T:IEventArg
+public interface IEventListener
 {
-    ITask OnNotice(T arg);
+    ITask OnNotice(IEventArg arg);
 }

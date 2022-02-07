@@ -2,16 +2,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using QiskitPlugin.Config;
 
 namespace QiskitPlugin.Internal
-{
+{ 
     public class QASMComunicator : Singleton<QASMComunicator>
     {
-        public CircuitConfig circuitConfig{get{return _circuitConfig;}}
-        public GateSetting gateSetting{get{return _gateSetting;}}
+        public CircuitConfig circuitConfig { get { return _circuitConfig; } }
+        public GateSetting gateSetting { get { return _gateSetting; } }
         [SerializeField] CircuitConfig _circuitConfig;
         [SerializeField] GateSetting _gateSetting;
         [SerializeField] bool autoStartServer = true;
@@ -21,11 +20,37 @@ namespace QiskitPlugin.Internal
         {
             if (autoStartServer)
             {
+                /*
+                process = new System.Diagnostics.Process();
+
+                process.StartInfo.FileName = System.Environment.GetEnvironmentVariable("ComSpec");
+
+                process.StartInfo.Arguments = "/k python " + Application.streamingAssetsPath + "/FlaskServer/server.py";
+                process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardInput = true;
+                process.Start();
+                */
+                process = new System.Diagnostics.Process
+                {
+                    StartInfo = new System.Diagnostics.ProcessStartInfo("python.exe")
+                    {
+                        UseShellExecute = true,
+                        //RedirectStandardOutput = true,
+                        WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized,
+                        Arguments = Application.streamingAssetsPath + "/FlaskServer/server.py"
+                    }
+                };
+
+                process.Start();
+
+                /*
                 string path = Application.dataPath + "/StreamingAssets/FlaskServer/build/exe.win-amd64-3.9/server.exe";
                 process = new System.Diagnostics.Process();
                 process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
                 process.StartInfo.FileName = path;
                 process.Start();
+                */
             }
         }
 
@@ -93,7 +118,7 @@ namespace QiskitPlugin.Internal
             }
 
 #if DEBUG
-            Debug.Log(result);
+            UnityEngine.Debug.Log(result);
 #endif
         }
 
@@ -114,7 +139,7 @@ namespace QiskitPlugin.Internal
             }
 
 #if DEBUG
-            Debug.Log(result);
+            UnityEngine.Debug.Log(result);
 #endif
         }
 

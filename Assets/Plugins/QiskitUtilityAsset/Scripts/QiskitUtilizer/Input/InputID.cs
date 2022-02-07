@@ -8,6 +8,7 @@ namespace QiskitPlugin.Input
         up,
         down,
         right,
-        left
+        left,
+        apply
     }
 }

@@ -10,7 +10,6 @@ import numpy as np
 
 
 def run_circuit(circuit_string: str, backend_to_run="qasm_simulator", api_token=None, shots=1024, memory=False):
-
     qc = build_circuit(circuit_string)
     print(qc)
 

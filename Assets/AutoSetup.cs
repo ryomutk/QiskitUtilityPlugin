@@ -9,17 +9,12 @@ using System.IO;
 [InitializeOnLoad]
 public class AutoSetup
 {
+    static bool ready = false;
     static AutoSetup()
     {
-        if (!Directory.Exists(Application.streamingAssetsPath + "/FlaskServer/build"))
+        if (!ready)
         {
-            Process p = new Process();
-            p.StartInfo.FileName = System.Environment.GetEnvironmentVariable("ComSpec");
-            p.StartInfo.Arguments = "/k python Assets/StreamingAssets/FlaskServer/setup.py build -b ./Assets/StreamingAssets/FlaskServer/build";
-            p.Start();
-            p.WaitForInputIdle();
-            p.Kill();
-            p.Close();
+
         }
     }
 
